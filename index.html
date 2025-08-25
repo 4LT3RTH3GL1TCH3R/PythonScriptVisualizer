@@ -1,82 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>🐍 Py Browser IDE</title>
-  <link rel="stylesheet" href="style.css" />
-  <!-- Monaco -->
-  <script>
-    window.require = undefined;
-  </script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.44.0/min/vs/loader.min.js"></script>
-  <script>
-    require.config({ paths: { 'vs': 'https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.44.0/min/vs' } });
-  </script>
-  <!-- Pyodide -->
-  <script src="https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js"></script>
+  <meta charset="UTF-8">
+  <title>Python Runner</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/pyodide/v0.26.2/full/pyodide.js"></script>
 </head>
 <body>
-  <div class="app">
-    <header>
-      <h1>🐍 Py Browser IDE</h1>
-      <span class="badge">Monaco + Pyodide</span>
-      <div class="spacer"></div>
-      <button id="runBtn">▶️ Run Code</button>
-      <button id="resetLiveBtn">🔁 Reset constant console</button>
-    </header>
+  <div class="container">
+    <h1>Python Runner</h1>
 
-    <div class="main">
-      <!-- File Explorer -->
-      <section class="files">
-        <div class="title"><strong>Files</strong><span class="spacer"></span><span class="hint">/workspace</span></div>
-        <div class="toolbar">
-          <button id="newFile">+ File</button>
-          <button id="newFolder">+ Folder</button>
-          <button id="rename">Rename</button>
-          <button id="del">Delete</button>
-          <button id="save">Save</button>
-        </div>
-        <div class="tree" id="fileTree"></div>
-      </section>
+    <textarea id="codeInput" placeholder="Write your Python code here..."></textarea>
+    <br>
+    <button id="runBtn">Run</button>
+    <button id="clearBtn">Clear Console</button>
 
-      <!-- Editor -->
-      <section class="editor">
-        <div id="editor"></div>
-        <div class="statusbar">
-          <span id="status">Loading…</span>
-          <div class="spacer"></div>
-          <span class="hint">Run: <span class="kbd">Ctrl</span>+<span class="kbd">Enter</span></span>
-        </div>
-      </section>
-
-      <!-- Runner -->
-      <section class="runner split">
-        <div class="tabs">
-          <button class="tab active" data-tab="console">Console</button>
-          <button class="tab" data-tab="constant">Constant Console</button>
-        </div>
-
-        <div class="pane active" id="pane-console">
-          <div class="topbar">
-            <span><strong>Console</strong></span>
-            <div class="spacer"></div>
-            <button id="clearConsole">Clear</button>
-          </div>
-          <div class="content console" id="console"></div>
-        </div>
-
-        <div class="pane" id="pane-constant">
-          <div class="topbar">
-            <span><strong>Constant Console</strong></span>
-            <div class="spacer"></div>
-            <span class="hint">Auto re-runs on edit</span>
-          </div>
-          <div class="content console" id="consoleLive"></div>
-        </div>
-      </section>
+    <div id="console">
+      <div id="output"></div>
+      <div id="inputArea">
+        <input id="commandInput" placeholder="Type command for input()..." />
+        <button id="sendInput">Send</button>
+      </div>
     </div>
   </div>
+
   <script src="script.js"></script>
 </body>
 </html>
